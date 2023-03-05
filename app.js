@@ -3,6 +3,8 @@ const debug = require("debug")("app");
 const morgan = require("morgan");
 const path = require("path");
 const genericRouter = express.Router();
+const elementRouter = express.Router();
+
 
 const app = express();
 const PORT = process.env.PORT;
@@ -17,11 +19,13 @@ genericRouter.route("/").get((req, res) => {
   res.render("generics");
 });
 
-genericRouter.route("/1").get((req, res) => {
-  res.send("Hellow world!! 11");
+elementRouter.route("/").get((req, res) => {
+  res.render("elements");
 });
 
 app.use("/generics", genericRouter);
+
+app.use("/elements", elementRouter);
 
 app.get("/", (req, res) => {
   res.render("index", {
